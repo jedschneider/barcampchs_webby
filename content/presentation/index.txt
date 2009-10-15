@@ -1,5 +1,5 @@
 ---
-title:      Webby S5
+title:      Ruby On Rails and Git Version Control
 created_at: 2008-05-18 22:10:21.995012 -06:00
 author:     Jed Schneider
 company:    Red Bone Code Hounds
@@ -10,49 +10,175 @@ filter:
   - slides
 layout: presentation
 ---
-h1. Webby S5 Generator
 
-Clever introductory text that will grab the audience's attention.
+h1. Ruby on Rails and Git
 
+table(#logos).
+|Building a web application with the Ruby on Rails framework and versioning your changes with git|
+||
+|<img src="images/bruce_on_rails.jpg" width="411" height="304" alt="Bruce On Rails">|
 
-h1. Title of the First Slide
+h1. What is Ruby on Rails?
 
-A little more build up before really getting into the meat of it.
+table(centered).
+| <%= render :partial => "rails_envy_1" %> |
 
+h1. Ruby on Rails 
 
-h1. Title of the Second Slide
+h2. a full-stack web framework
 
-Finally, some code!
+* Model View Controller design pattern
+* server and database agnostic
+* Integrated Testing
+* Just a few lines of configuration required
 
-<% uv :lang => "ragel", :theme => 'twilight' do -%>
-action dgt      { printf("DGT: %c\n", fc); }
-action dec      { printf("DEC: .\n"); }
-action exp      { printf("EXP: %c\n", fc); }
-action exp_sign { printf("SGN: %c\n", fc); }
-action number   { /*NUMBER*/ }
+h2. History
 
-number = (
-    [0-9]+ $dgt ( '.' @dec [0-9]+ $dgt )?
-    ( [eE] ( [+\-] $exp_sign )? [0-9]+ $exp )?
-) %number;
+No intro talk is complete without a reference to "37 Signals":http://37signals.com/ and "David Heinemeier Hansson":http://twitter.com/dhh
 
-main := ( number '\n' )*;
+h1. What is git?
+
+table(centered).
+|<%= render :partial => "linus_talk" %>|
+
+h1. Today's Plan
+
+# Create A web (blog) application with Rails
+# Version our progress with git
+# Build Database Models with Rails Generators
+# Manage our database relationships
+## using a rails Module called ActiveRecord
+## and a central Rails theme called Migrations
+# Create our Routing
+# Demonstrate the built-in Testing Framework
+# Add pre-built functionality with Ruby Gems
+
+h1. Lets Make a Rails Site
+
+@rails -d mysql barcamp@
+@rake db:create@
+
+h1. Lets Capture The Moment With git
+
+go into the directory
+@cd barcamp@
+hide your database passwords
+@cp config/database.yml config/database.yml.template@
+initialize the git repository
+@git init@
+ignore files that will cause issues or take up space
+@mate .gitignore #=> .DS, config/database.yml, log/*.log, tmp/**/*, doc/api, doc/app@
+track ignored directories
+@touch log/.gitignore; touch tmp/.gitignore@
+add all the files to the index
+@git add .@
+commit the project to the git repository
+@git commit -m 'initial import'@
+
+h1. A few points about git
+
+* you now have the entire repository history inside the project directory
+* no central server, its distributed
+
+h1. Lets Build A model
+
+the post model
+
+@script/generate scaffold post title:string article:text@
+
+h1. Migrations
+
+table(centered).
+|<%= render :partial => "rails_envy_2" %>|
+
+h1. Migrations
+
+@rake db:migrate@
+
+h1. Migrate data too
+
+@script/generate migration add_data_to_posts@
+
+<% uv :lang => "ruby", :theme => 'twilight' do -%>
+
+	def make_migration do 
+		work
+	end_
+	
 <% end -%>
 
+h1. Ok time for another commit
 
-h1. Title of the Third Slide
+@git status@
 
-This code comes from a partial
+@git add .@
 
-<%= render :partial => 'sample_code', :guard => true %>
+wait, didn't we already add these? No we have to add modified files to the index.
+
+@git commit -m 'created the post model'@
+
+@git status@
+
+@git log@
+
+h1. A Further Look At the Code
+
+<%= render :partial => "rails_envy_3"  %>
+
+h1. Convention over Configuration
+
+Convention over Configuration means you spend less time looking for things
+
+Lets look at the model, controller and view for post
+
+h1. Lets add another model
+
+the comment model
+
+the relationship:
+a post has many comments, each comment belongs to one and only post
+
+h1. A good time for a git branch
+
+in git, branching is cheap, so we can use one to isolate changes to our application
+@git checkout -b add_comment@
+
+h1. The comment model 
+
+@script/generate comment title:string commentText:text@
+
+h1. In comes the testing
+
+<span style="color:red">Red</span>. <span style="color:green">Green</span>. Refactor.
+
+Rails supports _Test Driven Development_ patterns, out of the box with Test:Unit. There are many other choices of test frameworks also (rSpec) There are also several tools available for _Behavior Driven Development_ (Cucumber).
+
+There are several things we want to test:
+
+# Test that the comment model code can talk to the database
+# Test that the model works as expected with model code (validations, eg)
+# Test that the controller works as expected
+# Test that html elements are accurately rendered
+
+h1. Unit Test
+
+h1. Functional Test
+
+h1. Adding Functionality with Gems
+
+h1. Publish To Github
+
+h1. A final dig
+
+<%= render :partial => "rails_envy_9" %>
 
 
-h1. Title of the Fourth Slide
 
-A quadratic equation with real or complex coefficients has two (not necessarily distinct) solutions, called roots, which may or may not be real, given by the quadratic formula:
 
-h1. The Final Slide
 
-And that about sums it up!
 
-Thanks for visiting
+
+
+
+
+
