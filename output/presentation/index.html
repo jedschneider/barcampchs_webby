@@ -14,7 +14,7 @@
 
    <link rel="stylesheet" href="s5/slides.css" type="text/css" media="projection" id="slideProj" />
    <link rel="stylesheet" href="s5/outline.css" type="text/css" media="screen" id="outlineStyle" />
-   <link rel="stylesheet" href="../css/uv/twilight.css" type="text/css" media="screen, projection" />
+   <link rel="stylesheet" href="../css/uv/iplastic.css" type="text/css" media="screen, projection" />
 
    <!-- S5 JS -->
    <script src="s5/slides.js" type="text/javascript"></script>
@@ -26,7 +26,7 @@
   <div id="currentSlide"><!-- DO NOT EDIT --></div>
   <div id="header"></div>
   <div id="footer">
-    <h2>Copyright &copy; Creative Commons</h2>
+    <h2>Red Bone Code Hounds</h2>
   </div>
 </div>
 
@@ -60,16 +60,20 @@
 <h1>I&#8217;m Jed Schneider</h1>
 <table class="centered">
 	<tr>
-		<td>Red Bone Code Hounds</td>
+		<td>jed@redbonecodehounds.com or jed.schneider@gmail.com</td>
 		<td><img src="images/RBCHIcon.png" width="125" height="144" alt="RBCHIcon"></td>
 	</tr>
 	<tr>
-		<td>@jedschneider</td>
+		<td><a href="http://twitter.com/jedschneider">@jedschneider</a></td>
 		<td><img src="images/twitter.1.png" width="200" height="150" alt="Twitter.1"></td>
 	</tr>
 	<tr>
 		<td><em>jed</em> on irc.freenode.net #railsbridge</td>
 		<td><img src="images/railsbridge_badge.png" width="160" height="80" alt="Railsbridge Badge"></td>
+	</tr>
+	<tr>
+		<td><a href="http://www.github.com/jedschneider">github.com/jedschneider</a></td>
+		<td><img src="images/octocat_stroked.png" width="200"  alt="Octocat Stroked"></td>
 	</tr>
 	<tr>
 		<td>jed.schneider@gmail.com</td>
@@ -165,15 +169,15 @@ initialize the git repository<br />
 ignore files that will cause issues or take up space<br />
 <code>mate .gitignore</code></p>
 <div class="UltraViolet">
-<pre class="twilight">
-.DS_Store 
-config/database.yml
-log/*.log
-tmp/**/*
-doc/api
-doc/app
-vedor/plugins/*
-vendor/gems/*
+<pre class="iplastic"><span class="line-numbers">   1 </span> #.gitignore file
+<span class="line-numbers">   2 </span> .DS_Store # for mac users
+<span class="line-numbers">   3 </span> config/database.yml
+<span class="line-numbers">   4 </span> log/*.log
+<span class="line-numbers">   5 </span> tmp/**/*
+<span class="line-numbers">   6 </span> doc/api
+<span class="line-numbers">   7 </span> doc/app
+<span class="line-numbers">   8 </span> vedor/plugins/*
+<span class="line-numbers">   9 </span> vendor/gems/*
 </pre>
 </div>
 <p>track ignored directories<br />
@@ -217,21 +221,21 @@ commit the project to the git repository<br />
 <p><code>rake db:migrate</code></p>
 <p>Migrations are a way to track and &#8216;migrate&#8217; between different database schema. It allows a modular approach to the database layer of web applications.</p>
 <div class="UltraViolet">
-<pre class="twilight"><span class="Comment"><span class="Comment">#</span> sample migration</span>
-<span class="Keyword">class</span> <span class="Entity">CreatePosts<span class="EntityInheritedClass"> <span class="EntityInheritedClass">&lt;</span> ActiveRecord::Migration</span></span>
-  <span class="Keyword">def</span> <span class="Entity">self.up</span>
-    create_table <span class="Constant"><span class="Constant">:</span>posts</span> <span class="Keyword">do </span>|<span class="Variable">t</span>|
-      t.<span class="Entity">string</span> <span class="Constant"><span class="Constant">:</span>title</span>
-      t.<span class="Entity">text</span> <span class="Constant"><span class="Constant">:</span>article</span>
-
-      t.<span class="Entity">timestamps</span>
-    <span class="Keyword">end</span>
-  <span class="Keyword">end</span>
-
-  <span class="Keyword">def</span> <span class="Entity">self.down</span>
-    drop_table <span class="Constant"><span class="Constant">:</span>posts</span>
-  <span class="Keyword">end</span>
-<span class="Keyword">end</span>
+<pre class="iplastic"><span class="line-numbers">   1 </span> <span class="Comment"><span class="Comment">#</span> sample migration</span>
+<span class="line-numbers">   2 </span> <span class="Keyword">class</span> <span class="TypeName">CreatePosts<span class="TypeName"> <span class="TypeName">&lt;</span> ActiveRecord::Migration</span></span>
+<span class="line-numbers">   3 </span>   <span class="Keyword">def</span> <span class="FunctionName">self.up</span>
+<span class="line-numbers">   4 </span>     create_table <span class="Constant"><span class="Constant">:</span>posts</span> <span class="Keyword">do </span>|t|
+<span class="line-numbers">   5 </span>       t.<span class="FunctionName">string</span> <span class="Constant"><span class="Constant">:</span>title</span>
+<span class="line-numbers">   6 </span>       t.<span class="FunctionName">text</span> <span class="Constant"><span class="Constant">:</span>article</span>
+<span class="line-numbers">   7 </span> 
+<span class="line-numbers">   8 </span>       t.<span class="FunctionName">timestamps</span>
+<span class="line-numbers">   9 </span>     <span class="Keyword">end</span>
+<span class="line-numbers">  10 </span>   <span class="Keyword">end</span>
+<span class="line-numbers">  11 </span> 
+<span class="line-numbers">  12 </span>   <span class="Keyword">def</span> <span class="FunctionName">self.down</span>
+<span class="line-numbers">  13 </span>     drop_table <span class="Constant"><span class="Constant">:</span>posts</span>
+<span class="line-numbers">  14 </span>   <span class="Keyword">end</span>
+<span class="line-numbers">  15 </span> <span class="Keyword">end</span>
 </pre>
 </div>
 </div>
@@ -250,18 +254,18 @@ commit the project to the git repository<br />
 <h1>Migrate data too</h1>
 <p><code>script/generate migration add_data_to_posts</code></p>
 <div class="UltraViolet">
-<pre class="twilight"><span class="line-numbers">   1 </span> 
-<span class="line-numbers">   2 </span> <span class="Keyword">class</span> <span class="Entity">AddPostData<span class="EntityInheritedClass"> <span class="EntityInheritedClass">&lt;</span> ActiveRecord::Migration</span></span>
-<span class="line-numbers">   3 </span>   <span class="Keyword">def</span> <span class="Entity">self.up</span>
-<span class="line-numbers">   4 </span>     <span class="Support">Post</span>.<span class="Entity">create</span> <span class="Constant"><span class="Constant">:</span>title</span> =&gt; <span class="String"><span class="String">&quot;</span>First Post<span class="String">&quot;</span></span>, 
+<pre class="iplastic"><span class="line-numbers">   1 </span> 
+<span class="line-numbers">   2 </span> <span class="Keyword">class</span> <span class="TypeName">AddPostData<span class="TypeName"> <span class="TypeName">&lt;</span> ActiveRecord::Migration</span></span>
+<span class="line-numbers">   3 </span>   <span class="Keyword">def</span> <span class="FunctionName">self.up</span>
+<span class="line-numbers">   4 </span>     <span class="Support">Post</span>.<span class="FunctionName">create</span> <span class="Constant"><span class="Constant">:</span>title</span> =&gt; <span class="String"><span class="String">&quot;</span>First Post<span class="String">&quot;</span></span>, 
 <span class="line-numbers">   5 </span>                 <span class="Constant"><span class="Constant">:</span>article</span> =&gt; <span class="String"><span class="String">&quot;</span>this is the first post<span class="String">&quot;</span></span>
-<span class="line-numbers">   6 </span>     <span class="Support">Post</span>.<span class="Entity">create</span> <span class="Constant"><span class="Constant">:</span>title</span>  =&gt; <span class="String"><span class="String">&quot;</span>Second Post<span class="String">&quot;</span></span>,
+<span class="line-numbers">   6 </span>     <span class="Support">Post</span>.<span class="FunctionName">create</span> <span class="Constant"><span class="Constant">:</span>title</span>  =&gt; <span class="String"><span class="String">&quot;</span>Second Post<span class="String">&quot;</span></span>,
 <span class="line-numbers">   7 </span>                 <span class="Constant"><span class="Constant">:</span>article</span> =&gt; <span class="String"><span class="String">&quot;</span>this is the second post<span class="String">&quot;</span></span>
 <span class="line-numbers">   8 </span>   <span class="Keyword">end</span>
 <span class="line-numbers">   9 </span> 
-<span class="line-numbers">  10 </span>   <span class="Keyword">def</span> <span class="Entity">self.down</span>
-<span class="line-numbers">  11 </span>     <span class="Support">Post</span>.<span class="Entity">find</span>(<span class="Constant"><span class="Constant">:</span>all</span>).<span class="Entity">each</span> <span class="Keyword">do </span>|<span class="Variable">post</span>|
-<span class="line-numbers">  12 </span>       post.<span class="Entity">delete</span>
+<span class="line-numbers">  10 </span>   <span class="Keyword">def</span> <span class="FunctionName">self.down</span>
+<span class="line-numbers">  11 </span>     <span class="Support">Post</span>.<span class="FunctionName">find</span>(<span class="Constant"><span class="Constant">:</span>all</span>).<span class="FunctionName">each</span> <span class="Keyword">do </span>|post|
+<span class="line-numbers">  12 </span>       post.<span class="FunctionName">delete</span>
 <span class="line-numbers">  13 </span>     <span class="Keyword">end</span>  
 <span class="line-numbers">  14 </span>   <span class="Keyword">end</span>
 <span class="line-numbers">  15 </span> <span class="Keyword">end</span>
@@ -294,8 +298,8 @@ commit the project to the git repository<br />
 <p>Convention over Configuration means you spend less time looking for things</p>
 <p>Lets look at the model, controller and view for post</p>
 <div class="UltraViolet">
-<pre class="twilight"><span class="line-numbers">   1 </span> <span class="Comment"><span class="Comment">#</span> app/models/post.rb</span>
-<span class="line-numbers">   2 </span> <span class="Keyword">class</span> <span class="Entity">Post<span class="EntityInheritedClass"> <span class="EntityInheritedClass">&lt;</span> ActiveRecord::Base</span></span>
+<pre class="iplastic"><span class="line-numbers">   1 </span> <span class="Comment"><span class="Comment">#</span> app/models/post.rb</span>
+<span class="line-numbers">   2 </span> <span class="Keyword">class</span> <span class="TypeName">Post<span class="TypeName"> <span class="TypeName">&lt;</span> ActiveRecord::Base</span></span>
 <span class="line-numbers">   3 </span> <span class="Keyword">end</span>
 </pre>
 </div>
@@ -309,7 +313,9 @@ commit the project to the git repository<br />
 <p>A post has many comments, <br />
 each comment belongs to one and only post</p>
 </blockquote>
+<blockquote>
 <p>in Rails we can define this simply with <code>belongs_to</code> and <code>has_many</code></p>
+</blockquote>
 </div>
 
 <div class="slide">
@@ -348,32 +354,32 @@ in <code>test_helper.rb</code>, <code>require 'redgreen'</code></p>
 <h1>Unit Test</h1>
 <p><span style="color:red;">Red</span></p>
 <div class="UltraViolet">
-<pre class="twilight"><span class="line-numbers">   1 </span> <span class="Keyword">require</span> <span class="String"><span class="String">'</span>test_helper<span class="String">'</span></span>
-<span class="line-numbers">   2 </span> <span class="Keyword">class</span> <span class="Entity">CommentTest<span class="EntityInheritedClass"> <span class="EntityInheritedClass">&lt;</span> ActiveSupport::TestCase</span></span>
-<span class="line-numbers">   3 </span>   <span class="Keyword">def</span> <span class="Entity">test_title_not_blank</span>
-<span class="line-numbers">   4 </span>     assert <span class="Constant">true</span>
-<span class="line-numbers">   5 </span>     <span class="Variable"><span class="Variable">@</span>comment</span> <span class="Keyword">=</span> <span class="Support">Comment</span>.<span class="Entity">new</span>(<span class="Constant"><span class="Constant">:</span>title</span> =&gt; <span class="Constant">nil</span>, <span class="Constant"><span class="Constant">:</span>comment_text</span> =&gt; <span class="String"><span class="String">&quot;</span>this is a comment<span class="String">&quot;</span></span>)
-<span class="line-numbers">   6 </span>     assert_equal <span class="Constant">false</span>, <span class="Variable"><span class="Variable">@</span>comment</span>.<span class="Entity">save</span>
+<pre class="iplastic"><span class="line-numbers">   1 </span> <span class="Keyword">require</span> <span class="String"><span class="String">'</span>test_helper<span class="String">'</span></span>
+<span class="line-numbers">   2 </span> <span class="Keyword">class</span> <span class="TypeName">CommentTest<span class="TypeName"> <span class="TypeName">&lt;</span> ActiveSupport::TestCase</span></span>
+<span class="line-numbers">   3 </span>   <span class="Keyword">def</span> <span class="FunctionName">test_title_not_blank</span>
+<span class="line-numbers">   4 </span>     assert <span class="Identifier">true</span>
+<span class="line-numbers">   5 </span>     @comment <span class="Keyword">=</span> <span class="Support">Comment</span>.<span class="FunctionName">new</span>(<span class="Constant"><span class="Constant">:</span>title</span> =&gt; <span class="Identifier">nil</span>, <span class="Constant"><span class="Constant">:</span>comment_text</span> =&gt; <span class="String"><span class="String">&quot;</span>this is a comment<span class="String">&quot;</span></span>)
+<span class="line-numbers">   6 </span>     assert_equal <span class="Identifier">false</span>, @comment.<span class="FunctionName">save</span>
 <span class="line-numbers">   7 </span>   <span class="Keyword">end</span>
 <span class="line-numbers">   8 </span> <span class="Keyword">end</span>
 </pre>
 </div>
 <p><span style="color:green;">Green</span></p>
 <div class="UltraViolet">
-<pre class="twilight"><span class="line-numbers">   1 </span> <span class="Keyword">class</span> <span class="Entity">Comment<span class="EntityInheritedClass"> <span class="EntityInheritedClass">&lt;</span> ActiveRecord::Base</span></span>
+<pre class="iplastic"><span class="line-numbers">   1 </span> <span class="Keyword">class</span> <span class="TypeName">Comment<span class="TypeName"> <span class="TypeName">&lt;</span> ActiveRecord::Base</span></span>
 <span class="line-numbers">   2 </span>   validates_presence_of <span class="Constant"><span class="Constant">:</span>title</span>, <span class="Constant"><span class="Constant">:</span>message</span> =&gt; <span class="String"><span class="String">&quot;</span>can't be blank<span class="String">&quot;</span></span>
 <span class="line-numbers">   3 </span> <span class="Keyword">end</span>
 </pre>
 </div>
 <p><span style="color:red;">Red</span></p>
 <div class="UltraViolet">
-<pre class="twilight"><span class="line-numbers">   1 </span> fixtures <span class="Constant"><span class="Constant">:</span>comments</span>, <span class="Constant"><span class="Constant">:</span>posts</span>
+<pre class="iplastic"><span class="line-numbers">   1 </span> fixtures <span class="Constant"><span class="Constant">:</span>comments</span>, <span class="Constant"><span class="Constant">:</span>posts</span>
 <span class="line-numbers">   2 </span> 
-<span class="line-numbers">   3 </span> <span class="Keyword">def</span> <span class="Entity">test_posts_have_many_comments</span>
-<span class="line-numbers">   4 </span>   assert_equal <span class="Constant">1</span>, <span class="Entity">comments</span>(<span class="Constant"><span class="Constant">:</span>one</span>).<span class="Entity">post_id</span>
-<span class="line-numbers">   5 </span>   assert_equal <span class="Constant">1</span>, <span class="Entity">comments</span>(<span class="Constant"><span class="Constant">:</span>two</span>).<span class="Entity">post_id</span>
-<span class="line-numbers">   6 </span>   assert_equal <span class="Constant">1</span>, <span class="Entity">posts</span>(<span class="Constant"><span class="Constant">:</span>one</span>).<span class="Entity">id</span>
-<span class="line-numbers">   7 </span>   assert_equal <span class="Constant">2</span>, <span class="Entity">posts</span>(<span class="Constant"><span class="Constant">:</span>one</span>).<span class="Entity">comments</span>.<span class="Entity">count</span>
+<span class="line-numbers">   3 </span> <span class="Keyword">def</span> <span class="FunctionName">test_posts_have_many_comments</span>
+<span class="line-numbers">   4 </span>   assert_equal <span class="Number">1</span>, <span class="FunctionName">comments</span>(<span class="Constant"><span class="Constant">:</span>one</span>).<span class="FunctionName">post_id</span>
+<span class="line-numbers">   5 </span>   assert_equal <span class="Number">1</span>, <span class="FunctionName">comments</span>(<span class="Constant"><span class="Constant">:</span>two</span>).<span class="FunctionName">post_id</span>
+<span class="line-numbers">   6 </span>   assert_equal <span class="Number">1</span>, <span class="FunctionName">posts</span>(<span class="Constant"><span class="Constant">:</span>one</span>).<span class="FunctionName">id</span>
+<span class="line-numbers">   7 </span>   assert_equal <span class="Number">2</span>, <span class="FunctionName">posts</span>(<span class="Constant"><span class="Constant">:</span>one</span>).<span class="FunctionName">comments</span>.<span class="FunctionName">count</span>
 <span class="line-numbers">   8 </span> <span class="Keyword">end</span>
 </pre>
 </div>
@@ -384,7 +390,7 @@ in <code>test_helper.rb</code>, <code>require 'redgreen'</code></p>
 <p><code>rake test:functionals</code></p>
 <p><span style="color:red;">Red</span></p>
 <div class="UltraViolet">
-<pre class="twilight"><span class="line-numbers">   1 </span> <span class="Keyword">def</span> <span class="Entity">test_routing_for_comments</span>
+<pre class="iplastic"><span class="line-numbers">   1 </span> <span class="Keyword">def</span> <span class="FunctionName">test_routing_for_comments</span>
 <span class="line-numbers">   2 </span>   options <span class="Keyword">=</span> {<span class="Constant"><span class="Constant">:</span>controller</span> =&gt; <span class="String"><span class="String">&quot;</span>comments<span class="String">&quot;</span></span>, <span class="Constant"><span class="Constant">:</span>action</span> =&gt; <span class="String"><span class="String">&quot;</span>index<span class="String">&quot;</span></span>, <span class="Constant"><span class="Constant">:</span>post_id</span> =&gt; <span class="String"><span class="String">&quot;</span>1<span class="String">&quot;</span></span>}
 <span class="line-numbers">   3 </span>   assert_routing <span class="String"><span class="String">&quot;</span>/posts/1/comments<span class="String">&quot;</span></span>, options
 <span class="line-numbers">   4 </span> <span class="Keyword">end</span>
@@ -392,8 +398,8 @@ in <code>test_helper.rb</code>, <code>require 'redgreen'</code></p>
 </div>
 <p><span style="color:green;">Green</span></p>
 <div class="UltraViolet">
-<pre class="twilight"><span class="line-numbers">   1 </span> <span class="Comment"><span class="Comment">#</span>routes.rb</span>
-<span class="line-numbers">   2 </span> map.<span class="Entity">resources</span> <span class="Constant"><span class="Constant">:</span>posts</span>, <span class="Constant"><span class="Constant">:</span>has_many</span> =&gt; <span class="Constant"><span class="Constant">:</span>comments</span>
+<pre class="iplastic"><span class="line-numbers">   1 </span> <span class="Comment"><span class="Comment">#</span>routes.rb</span>
+<span class="line-numbers">   2 </span> map.<span class="FunctionName">resources</span> <span class="Constant"><span class="Constant">:</span>posts</span>, <span class="Constant"><span class="Constant">:</span>has_many</span> =&gt; <span class="Constant"><span class="Constant">:</span>comments</span>
 </pre>
 </div>
 </div>
@@ -402,9 +408,9 @@ in <code>test_helper.rb</code>, <code>require 'redgreen'</code></p>
 <h1>Functional Test Views</h1>
 <p><span style="color:red;">Red</span></p>
 <div class="UltraViolet">
-<pre class="twilight"><span class="line-numbers">   1 </span> <span class="Comment"><span class="Comment">#</span>posts_controller_test.rb</span>
-<span class="line-numbers">   2 </span> <span class="Keyword">def</span> <span class="Entity">test_get_index_template</span>
-<span class="line-numbers">   3 </span>   assert get <span class="Constant"><span class="Constant">:</span>show</span>, <span class="Constant"><span class="Constant">:</span>id</span> =&gt; <span class="Entity">posts</span>(<span class="Constant"><span class="Constant">:</span>one</span>).<span class="Entity">id</span>
+<pre class="iplastic"><span class="line-numbers">   1 </span> <span class="Comment"><span class="Comment">#</span>posts_controller_test.rb</span>
+<span class="line-numbers">   2 </span> <span class="Keyword">def</span> <span class="FunctionName">test_get_index_template</span>
+<span class="line-numbers">   3 </span>   assert get <span class="Constant"><span class="Constant">:</span>show</span>, <span class="Constant"><span class="Constant">:</span>id</span> =&gt; <span class="FunctionName">posts</span>(<span class="Constant"><span class="Constant">:</span>one</span>).<span class="FunctionName">id</span>
 <span class="line-numbers">   4 </span>   assert_template <span class="String"><span class="String">&quot;</span>show<span class="String">&quot;</span></span>
 <span class="line-numbers">   5 </span>   assert_select <span class="String"><span class="String">&quot;</span>Div#comments<span class="String">&quot;</span></span>
 <span class="line-numbers">   6 </span> <span class="Keyword">end</span>
@@ -412,13 +418,13 @@ in <code>test_helper.rb</code>, <code>require 'redgreen'</code></p>
 </div>
 <p><span style="color:green;">Green</span></p>
 <div class="UltraViolet">
-<pre class="twilight"><span class="line-numbers">   1 </span> 
-<span class="line-numbers">   2 </span> 	<span class="MetaTagAll"><span class="MetaTagAll">&lt;</span><span class="MetaTagAll">div</span> <span class="MetaTagAll"><span class="MetaTagAll">id</span><span class="MetaTagAll">=</span><span class="String"><span class="String">&quot;</span><span class="String">comments</span><span class="String">&quot;</span></span></span> <span class="MetaTagAll">style</span>=<span class="String"><span class="String">&quot;</span>background-color:green;<span class="String">&quot;</span></span><span class="MetaTagAll">&gt;</span></span>
-<span class="line-numbers">   3 </span> 		<span class="EmbeddedSource"><span class="EmbeddedSource">&lt;%</span> <span class="Variable"><span class="Variable">@</span>post</span><span class="EmbeddedSource"><span class="EmbeddedSource">.</span><span class="Entity">comments</span></span><span class="EmbeddedSource"><span class="EmbeddedSource">.</span><span class="Entity">each</span></span> <span class="Keyword">do </span><span class="EmbeddedSource">|</span><span class="Variable">comment</span><span class="EmbeddedSource">|</span> <span class="EmbeddedSource">%&gt;</span></span>
-<span class="line-numbers">   4 </span> 			<span class="MetaTagAll"><span class="MetaTagAll">&lt;</span><span class="MetaTagAll">h3</span><span class="MetaTagAll">&gt;</span></span><span class="EmbeddedSource"><span class="EmbeddedSource">&lt;%=</span> comment<span class="EmbeddedSource"><span class="EmbeddedSource">.</span><span class="Entity">title</span></span> <span class="EmbeddedSource">%&gt;</span></span><span class="MetaTagAll"><span class="MetaTagAll">&lt;/</span><span class="MetaTagAll">h3</span><span class="MetaTagAll">&gt;</span></span>
-<span class="line-numbers">   5 </span> 			<span class="MetaTagAll"><span class="MetaTagAll">&lt;</span><span class="MetaTagAll">p</span><span class="MetaTagAll">&gt;</span></span><span class="EmbeddedSource"><span class="EmbeddedSource">&lt;%=</span> comment<span class="EmbeddedSource"><span class="EmbeddedSource">.</span><span class="Entity">comment_text</span></span> <span class="EmbeddedSource">%&gt;</span></span><span class="MetaTagAll"><span class="MetaTagAll">&lt;/</span><span class="MetaTagAll">p</span><span class="MetaTagAll">&gt;</span></span>
+<pre class="iplastic"><span class="line-numbers">   1 </span> 
+<span class="line-numbers">   2 </span> 	<span class="Tag"><span class="Tag">&lt;</span><span class="TagName">div</span> <span class="Tag"><span class="TagAttribute">id</span><span class="Tag">=</span><span class="String"><span class="String">&quot;</span><span class="String">comments</span><span class="String">&quot;</span></span></span> <span class="TagAttribute">style</span>=<span class="String"><span class="String">&quot;</span>background-color:green;<span class="String">&quot;</span></span><span class="Tag">&gt;</span></span>
+<span class="line-numbers">   3 </span> 		<span class="EmbeddedSource"><span class="EmbeddedSource">&lt;%</span> <span class="EmbeddedSource"><span class="EmbeddedSource">@</span>post</span><span class="EmbeddedSource"><span class="EmbeddedSource">.</span><span class="FunctionName">comments</span></span><span class="EmbeddedSource"><span class="EmbeddedSource">.</span><span class="FunctionName">each</span></span> <span class="Keyword">do </span><span class="EmbeddedSource">|</span><span class="EmbeddedSource">comment</span><span class="EmbeddedSource">|</span> <span class="EmbeddedSource">%&gt;</span></span>
+<span class="line-numbers">   4 </span> 			<span class="Tag"><span class="Tag">&lt;</span><span class="TagName">h3</span><span class="Tag">&gt;</span></span><span class="EmbeddedSource"><span class="EmbeddedSource">&lt;%=</span> comment<span class="EmbeddedSource"><span class="EmbeddedSource">.</span><span class="FunctionName">title</span></span> <span class="EmbeddedSource">%&gt;</span></span><span class="Tag"><span class="Tag">&lt;/</span><span class="TagName">h3</span><span class="Tag">&gt;</span></span>
+<span class="line-numbers">   5 </span> 			<span class="Tag"><span class="Tag">&lt;</span><span class="TagName">p</span><span class="Tag">&gt;</span></span><span class="EmbeddedSource"><span class="EmbeddedSource">&lt;%=</span> comment<span class="EmbeddedSource"><span class="EmbeddedSource">.</span><span class="FunctionName">comment_text</span></span> <span class="EmbeddedSource">%&gt;</span></span><span class="Tag"><span class="Tag">&lt;/</span><span class="TagName">p</span><span class="Tag">&gt;</span></span>
 <span class="line-numbers">   6 </span> 		<span class="EmbeddedSource"><span class="EmbeddedSource">&lt;%</span> <span class="Keyword">end</span> <span class="EmbeddedSource">%&gt;</span></span>
-<span class="line-numbers">   7 </span> 	<span class="MetaTagAll"><span class="MetaTagAll">&lt;/</span><span class="MetaTagAll">div</span><span class="MetaTagAll">&gt;</span></span>
+<span class="line-numbers">   7 </span> 	<span class="Tag"><span class="Tag">&lt;/</span><span class="TagName">div</span><span class="Tag">&gt;</span></span>
 <span class="line-numbers">   8 </span> 	
 </pre>
 </div>
@@ -441,7 +447,7 @@ in <code>test_helper.rb</code>, <code>require 'redgreen'</code></p>
 <p><code>script/plugin install git://github.com/defunkt/acts_as_textiled.git</code></p>
 <p>and, in the post model</p>
 <div class="UltraViolet">
-<pre class="twilight"><span class="line-numbers">   1 </span> <span class="Keyword">class</span> <span class="Entity">Post<span class="EntityInheritedClass"> <span class="EntityInheritedClass">&lt;</span> ActiveRecord::Base</span></span>
+<pre class="iplastic"><span class="line-numbers">   1 </span> <span class="Keyword">class</span> <span class="TypeName">Post<span class="TypeName"> <span class="TypeName">&lt;</span> ActiveRecord::Base</span></span>
 <span class="line-numbers">   2 </span>   has_many <span class="Constant"><span class="Constant">:</span>comments</span>
 <span class="line-numbers">   3 </span>   
 <span class="line-numbers">   4 </span>   acts_as_textiled <span class="Constant"><span class="Constant">:</span>article</span>
@@ -466,7 +472,11 @@ add the origin</p>
 
 <div class="slide">
 <h1>A final dig</h1>
-<p><object width="640" height="505"><param name="movie" value="http://www.youtube.com/v/z99EHyG2jQA&hl=en&fs=1&rel=0&color1=0x2b405b&color2=0x6b8ab6"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/z99EHyG2jQA&hl=en&fs=1&rel=0&color1=0x2b405b&color2=0x6b8ab6" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="640" height="505"></embed></object></p></div>
+<table class="centered">
+	<tr>
+		<td> <object width="640" height="505"><param name="movie" value="http://www.youtube.com/v/z99EHyG2jQA&hl=en&fs=1&rel=0&color1=0x2b405b&color2=0x6b8ab6"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/z99EHyG2jQA&hl=en&fs=1&rel=0&color1=0x2b405b&color2=0x6b8ab6" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="640" height="505"></embed></object> </td>
+	</tr>
+</table></div>
 
 
 </div>

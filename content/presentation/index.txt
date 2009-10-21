@@ -3,7 +3,7 @@ title:      Ruby On Rails and Git Version Control
 created_at: 2008-05-18 22:10:21.995012 -06:00
 author:     Jed Schneider
 company:    Red Bone Code Hounds
-copyright:  Creative Commons
+copyright:  Red Bone Code Hounds
 filter:
   - erb
   - textile
@@ -28,9 +28,10 @@ h1. About the audience?
 h1. I'm Jed Schneider
 
 table(centered).
-|Red Bone Code Hounds|<img src="images/RBCHIcon.png" width="125" height="144" alt="RBCHIcon">|
-|@jedschneider|<img src="images/twitter.1.png" width="200" height="150" alt="Twitter.1">|
+|jed@redbonecodehounds.com or jed.schneider@gmail.com|<img src="images/RBCHIcon.png" width="125" height="144" alt="RBCHIcon">|
+|"@jedschneider":http://twitter.com/jedschneider|<img src="images/twitter.1.png" width="200" height="150" alt="Twitter.1">|
 |_jed_ on irc.freenode.net #railsbridge|<img src="images/railsbridge_badge.png" width="160" height="80" alt="Railsbridge Badge">|
+|"github.com/jedschneider":http://www.github.com/jedschneider|<img src="images/octocat_stroked.png" width="200"  alt="Octocat Stroked">|
 |jed.schneider@gmail.com|706-207-4458|
 
 h1. What is Ruby on Rails?
@@ -101,7 +102,18 @@ initialize the git repository
 ignore files that will cause issues or take up space
 @mate .gitignore@
 
-<%= render :partial  => "gitignore" , :force => true %>
+<% uv :lang => 'plain_text', :line_numbers => true do -%>
+#.gitignore file
+.DS_Store # for mac users
+config/database.yml
+log/*.log
+tmp/**/*
+doc/api
+doc/app
+vedor/plugins/*
+vendor/gems/*
+<% end -%>
+
 track ignored directories
 @touch log/.gitignore; touch tmp/.gitignore@
 add all the files to the index
@@ -136,7 +148,7 @@ h1. Migrations
 
 Migrations are a way to track and 'migrate' between different database schema. It allows a modular approach to the database layer of web applications.
 
-<% uv( :lang => "ruby", :line_numbers => false ) do -%>
+<% uv( :lang => "ruby", :line_numbers => true ) do -%>
 # sample migration
 class CreatePosts < ActiveRecord::Migration
   def self.up
@@ -172,7 +184,7 @@ h1. Migrate data too
 
 @script/generate migration add_data_to_posts@
 
-<% uv :lang => "ruby", :theme => 'twilight' do -%>
+<% uv( :lang => "ruby", :line_numbers => true ) do -%>
 
 class AddPostData < ActiveRecord::Migration
   def self.up
@@ -214,7 +226,7 @@ Convention over Configuration means you spend less time looking for things
 
 Lets look at the model, controller and view for post
 
-<% uv :lang => "ruby", :theme => 'twilight' do -%>
+<% uv( :lang => "ruby", :line_numbers => true ) do -%>
 # app/models/post.rb
 class Post < ActiveRecord::Base
 end
@@ -229,7 +241,7 @@ h2. the relationship:
 bq. A post has many comments, 
 each comment belongs to one and only post
 
-p. in Rails we can define this simply with @belongs_to@ and @has_many@
+bq. in Rails we can define this simply with @belongs_to@ and @has_many@
 
 h1. A good time for a git branch
 
@@ -266,7 +278,7 @@ h1. Unit Test
 
 <span style="color:red;">Red</span>
 
-<% uv :lang => "ruby", :theme => 'twilight' do -%>
+<% uv( :lang => "ruby", :line_numbers => true ) do -%>
 require 'test_helper'
 class CommentTest < ActiveSupport::TestCase
   def test_title_not_blank
@@ -279,7 +291,7 @@ end
 
 <span style="color:green;">Green</span>
 
-<% uv :lang => "ruby", :theme => 'twilight' do -%>
+<% uv( :lang => "ruby", :line_numbers => true ) do -%>
 class Comment < ActiveRecord::Base
   validates_presence_of :title, :message => "can't be blank"
 end
@@ -287,7 +299,7 @@ end
 
 <span style="color:red;">Red</span>
 
-<% uv :lang => "ruby", :theme => 'twilight' do -%>
+<% uv( :lang => "ruby", :line_numbers => true ) do -%>
 fixtures :comments, :posts
 
 def test_posts_have_many_comments
@@ -304,7 +316,7 @@ h1. Functional Test
 
 <span style="color:red;">Red</span>
 
-<% uv :lang => "ruby", :theme => 'twilight' do -%>
+<% uv( :lang => "ruby", :line_numbers => true ) do -%>
 def test_routing_for_comments
   options = {:controller => "comments", :action => "index", :post_id => "1"}
   assert_routing "/posts/1/comments", options
@@ -313,7 +325,7 @@ end
 
 <span style="color:green;">Green</span>
 
-<% uv :lang => "ruby", :theme => 'twilight' do -%>
+<% uv( :lang => "ruby", :line_numbers => true ) do -%>
 #routes.rb
 map.resources :posts, :has_many => :comments
 <% end -%>
@@ -323,7 +335,7 @@ h1. Functional Test Views
 
 <span style="color:red;">Red</span>
 
-<% uv :lang => "ruby", :theme => 'twilight' do -%>
+<% uv( :lang => "ruby", :line_numbers => true ) do -%>
 #posts_controller_test.rb
 def test_get_index_template
   assert get :show, :id => posts(:one).id
@@ -334,7 +346,7 @@ end
 
 <span style="color:green;">Green</span>
 
-<% uv :lang => "html", :theme => 'twilight' do -%>
+<% uv( :lang => "html", :line_numbers => true ) do -%>
 
 	<div id="comments" style="background-color:green;">
 		<%% @post.comments.each do |comment| %>
@@ -365,7 +377,7 @@ We want to use a textile plugin, so:
 
 and, in the post model
 
-<% uv :lang => "ruby", :theme => 'twilight' do -%>
+<% uv( :lang => "ruby", :line_numbers => true ) do -%>
 class Post < ActiveRecord::Base
   has_many :comments
   
@@ -392,7 +404,8 @@ add the origin
 
 h1. A final dig
 
-<%= render :partial => "rails_envy_9" %>
+table(centered).
+| <%= render :partial => "rails_envy_9" %> |
 
 
 

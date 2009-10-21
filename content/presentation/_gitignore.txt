@@ -1,8 +1,7 @@
 ---
 filter: erb
 ---
-<% uv :lang => 'plain_text', :line_numbers => false, :theme => 'twilight' do -%>
-
+<% uv :lang => 'plain_text', :line_numbers => truedo -%>
 .DS_Store 
 config/database.yml
 log/*.log
