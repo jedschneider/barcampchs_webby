@@ -1,0 +1,14 @@
+---
+filter: erb
+---
+<% uv :lang => 'plain_text', :line_numbers => false, :theme => 'twilight' do -%>
+
+.DS_Store 
+config/database.yml
+log/*.log
+tmp/**/*
+doc/api
+doc/app
+vedor/plugins/*
+vendor/gems/*
+<% end -%>

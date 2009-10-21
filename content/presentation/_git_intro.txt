@@ -1,0 +1,9 @@
+its a version control system
+its distributed
+its fast
+its used to manage the linux kernel 
+its well integrated with rails
+its easy, sorta...
+
+skip to min 3:00
+

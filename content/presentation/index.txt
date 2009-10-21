@@ -18,10 +18,25 @@ table(#logos).
 ||
 |<img src="images/bruce_on_rails.jpg" width="411" height="304" alt="Bruce On Rails">|
 
+h1. About the audience?
+
+# who has used rails?
+# who has used git?
+# does anybody use these tools on a daily basis?
+# anyone an agile, XP, scrum developer?
+
+h1. I'm Jed Schneider
+
+table(centered).
+|Red Bone Code Hounds|<img src="images/RBCHIcon.png" width="125" height="144" alt="RBCHIcon">|
+|@jedschneider|<img src="images/twitter.1.png" width="200" height="150" alt="Twitter.1">|
+|_jed_ on irc.freenode.net #railsbridge|<img src="images/railsbridge_badge.png" width="160" height="80" alt="Railsbridge Badge">|
+|jed.schneider@gmail.com|706-207-4458|
+
 h1. What is Ruby on Rails?
 
 table(centered).
-| <%= render :partial => "rails_envy_1" %> |
+| <%= render :partial=>"rails_envy_1" %>|
 
 h1. Ruby on Rails 
 
@@ -31,15 +46,23 @@ h2. a full-stack web framework
 * server and database agnostic
 * Integrated Testing
 * Just a few lines of configuration required
+* a strong community of developers
+* a clean code ethic (DRY, YAGNI, etc)
 
-h2. History
+h2. Ruby on Rails History and Acceptance
 
 No intro talk is complete without a reference to "37 Signals":http://37signals.com/ and "David Heinemeier Hansson":http://twitter.com/dhh
+
+* 1,173,440 gem installs
+* 4,329 'watchers' on github, 741 forks of the project
+* "Scalabilty":http://highscalability.com/blog/2009/9/22/how-ravelry-scales-to-10-million-requests-using-rails.html
+* "List of Apps on Rails":http://rubyonrails.org/applications
+
 
 h1. What is git?
 
 table(centered).
-|<%= render :partial => "linus_talk" %>|
+|<%= render :partial => "linus_talk" %>|<%= render :partial => "git_intro" %>|
 
 h1. Today's Plan
 
@@ -51,12 +74,21 @@ h1. Today's Plan
 ## and a central Rails theme called Migrations
 # Create our Routing
 # Demonstrate the built-in Testing Framework
-# Add pre-built functionality with Ruby Gems
+# Add pre-built functionality with Ruby Gems and plugins
 
 h1. Lets Make a Rails Site
 
 @rails -d mysql barcamp@
-@rake db:create@
+@cd barcamp@
+@rake db:create:all@
+
+Wait, what did we just do? 
+
+# created the framework file structure
+# defined the database hooks
+# created 3 distinct databases development, production, test 
+
+@rake stats@
 
 h1. Lets Capture The Moment With git
 
@@ -67,7 +99,9 @@ hide your database passwords
 initialize the git repository
 @git init@
 ignore files that will cause issues or take up space
-@mate .gitignore #=> .DS, config/database.yml, log/*.log, tmp/**/*, doc/api, doc/app@
+@mate .gitignore@
+
+<%= render :partial  => "gitignore" , :force => true %>
 track ignored directories
 @touch log/.gitignore; touch tmp/.gitignore@
 add all the files to the index
@@ -77,8 +111,13 @@ commit the project to the git repository
 
 h1. A few points about git
 
-* you now have the entire repository history inside the project directory
+* you now have the entire repository history inside the project directory (.git)
 * no central server, its distributed
+
+h2. a couple great commands
+
+* @git status@
+* @git log@
 
 h1. Lets Build A model
 
@@ -95,16 +134,24 @@ h1. Migrations
 
 @rake db:migrate@
 
-h1. Migrate data too
+Migrations are a way to track and 'migrate' between different database schema. It allows a modular approach to the database layer of web applications.
 
-@script/generate migration add_data_to_posts@
+<% uv( :lang => "ruby", :line_numbers => false ) do -%>
+# sample migration
+class CreatePosts < ActiveRecord::Migration
+  def self.up
+    create_table :posts do |t|
+      t.string :title
+      t.text :article
 
-<% uv :lang => "ruby", :theme => 'twilight' do -%>
+      t.timestamps
+    end
+  end
 
-	def make_migration do 
-		work
-	end_
-	
+  def self.down
+    drop_table :posts
+  end
+end
 <% end -%>
 
 h1. Ok time for another commit
@@ -115,15 +162,51 @@ h1. Ok time for another commit
 
 wait, didn't we already add these? No we have to add modified files to the index.
 
-@git commit -m 'created the post model'@
+@git commit -m 'scaffolded the post model'@
 
 @git status@
 
 @git log@
 
+h1. Migrate data too
+
+@script/generate migration add_data_to_posts@
+
+<% uv :lang => "ruby", :theme => 'twilight' do -%>
+
+class AddPostData < ActiveRecord::Migration
+  def self.up
+    Post.create :title => "First Post", 
+                :article => "this is the first post"
+    Post.create :title  => "Second Post",
+                :article => "this is the second post"
+  end
+
+  def self.down
+    Post.find(:all).each do |post|
+      post.delete
+    end  
+  end
+end
+	
+<% end -%>
+
+@git status@
+@git add .@
+@git commit -m "created a data migration for post data"@
+
+h1. Stop and Smell the roses
+
+@script/server@
+
+browse to "localhost:3000":http://localhost:3000
+
+browse to "localhost:3000/posts":http://localhost:3000/posts
+
 h1. A Further Look At the Code
 
-<%= render :partial => "rails_envy_3"  %>
+table(centered).
+|<%= render :partial => "rails_envy_3" %>|
 
 h1. Convention over Configuration
 
@@ -131,21 +214,35 @@ Convention over Configuration means you spend less time looking for things
 
 Lets look at the model, controller and view for post
 
+<% uv :lang => "ruby", :theme => 'twilight' do -%>
+# app/models/post.rb
+class Post < ActiveRecord::Base
+end
+<% end -%>
+
 h1. Lets add another model
 
-the comment model
+h2. The Comment Model
 
-the relationship:
-a post has many comments, each comment belongs to one and only post
+h2. the relationship:
+
+bq. A post has many comments, 
+each comment belongs to one and only post
+
+p. in Rails we can define this simply with @belongs_to@ and @has_many@
 
 h1. A good time for a git branch
 
 in git, branching is cheap, so we can use one to isolate changes to our application
-@git checkout -b add_comment@
+@git status@
+@git checkout -b add_comment_model@
 
 h1. The comment model 
 
-@script/generate comment title:string commentText:text@
+@script/generate scaffold comment title:string comment_text:text post_id:integer@
+
+
+@rake db:migrate@
 
 h1. In comes the testing
 
@@ -153,20 +250,145 @@ h1. In comes the testing
 
 Rails supports _Test Driven Development_ patterns, out of the box with Test:Unit. There are many other choices of test frameworks also (rSpec) There are also several tools available for _Behavior Driven Development_ (Cucumber).
 
-There are several things we want to test:
+There are several things we may want to test:
 
 # Test that the comment model code can talk to the database
 # Test that the model works as expected with model code (validations, eg)
 # Test that the controller works as expected
 # Test that html elements are accurately rendered
 
+h1. Setup test env
+
+@rake db:test:prepare@
+in @test_helper.rb@, @require 'redgreen'@
+
 h1. Unit Test
+
+<span style="color:red;">Red</span>
+
+<% uv :lang => "ruby", :theme => 'twilight' do -%>
+require 'test_helper'
+class CommentTest < ActiveSupport::TestCase
+  def test_title_not_blank
+    assert true
+    @comment = Comment.new(:title => nil, :comment_text => "this is a comment")
+    assert_equal false, @comment.save
+  end
+end
+<% end -%>
+
+<span style="color:green;">Green</span>
+
+<% uv :lang => "ruby", :theme => 'twilight' do -%>
+class Comment < ActiveRecord::Base
+  validates_presence_of :title, :message => "can't be blank"
+end
+<% end -%>
+
+<span style="color:red;">Red</span>
+
+<% uv :lang => "ruby", :theme => 'twilight' do -%>
+fixtures :comments, :posts
+
+def test_posts_have_many_comments
+  assert_equal 1, comments(:one).post_id
+  assert_equal 1, comments(:two).post_id
+  assert_equal 1, posts(:one).id
+  assert_equal 2, posts(:one).comments.count
+end
+<% end -%>
 
 h1. Functional Test
 
-h1. Adding Functionality with Gems
+@rake test:functionals@
+
+<span style="color:red;">Red</span>
+
+<% uv :lang => "ruby", :theme => 'twilight' do -%>
+def test_routing_for_comments
+  options = {:controller => "comments", :action => "index", :post_id => "1"}
+  assert_routing "/posts/1/comments", options
+end
+<% end -%>
+
+<span style="color:green;">Green</span>
+
+<% uv :lang => "ruby", :theme => 'twilight' do -%>
+#routes.rb
+map.resources :posts, :has_many => :comments
+<% end -%>
+
+
+h1. Functional Test Views
+
+<span style="color:red;">Red</span>
+
+<% uv :lang => "ruby", :theme => 'twilight' do -%>
+#posts_controller_test.rb
+def test_get_index_template
+  assert get :show, :id => posts(:one).id
+  assert_template "show"
+  assert_select "Div#comments"
+end
+<% end -%>
+
+<span style="color:green;">Green</span>
+
+<% uv :lang => "html", :theme => 'twilight' do -%>
+
+	<div id="comments" style="background-color:green;">
+		<%% @post.comments.each do |comment| %>
+			<h3><%%= comment.title %></h3>
+			<p><%%= comment.comment_text %></p>
+		<%% end %>
+	</div>
+	
+<% end -%>
+
+h1. Merge In the Comments Code
+
+@git status@
+@git add .@
+@git commit -m "finished up comment model"@
+@git checkout master@
+@git merge add_comment_model@
+
+h1. Adding Functionality with Gems & Plugins
+
+@git checkout -b add_textile_editor@
+
+We want to use a textile plugin, so: 
+
+"acts as textiled":http://github.com/defunkt/acts_as_textiled
+
+@script/plugin install git://github.com/defunkt/acts_as_textiled.git@
+
+and, in the post model
+
+<% uv :lang => "ruby", :theme => 'twilight' do -%>
+class Post < ActiveRecord::Base
+  has_many :comments
+  
+  acts_as_textiled :article
+end
+<% end -%>
+
+now fix up the views
 
 h1. Publish To Github
+
+merge back to master
+
+@git status@
+@git add .@
+@git commit -m "added acts_as_textiled to post model"@
+@git checkout master@
+@git merge add_textile_editor@
+
+create a new github project
+add the origin
+
+@git push origin master@
 
 h1. A final dig
 

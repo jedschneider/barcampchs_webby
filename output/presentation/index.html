@@ -47,10 +47,42 @@
 </div>
 
 <div class="slide">
+<h1>About the audience?</h1>
+<ol>
+	<li>who has used rails?</li>
+	<li>who has used git?</li>
+	<li>does anybody use these tools on a daily basis?</li>
+	<li>anyone an agile, XP, scrum developer?</li>
+</ol>
+</div>
+
+<div class="slide">
+<h1>I&#8217;m Jed Schneider</h1>
+<table class="centered">
+	<tr>
+		<td>Red Bone Code Hounds</td>
+		<td><img src="images/RBCHIcon.png" width="125" height="144" alt="RBCHIcon"></td>
+	</tr>
+	<tr>
+		<td>@jedschneider</td>
+		<td><img src="images/twitter.1.png" width="200" height="150" alt="Twitter.1"></td>
+	</tr>
+	<tr>
+		<td><em>jed</em> on irc.freenode.net #railsbridge</td>
+		<td><img src="images/railsbridge_badge.png" width="160" height="80" alt="Railsbridge Badge"></td>
+	</tr>
+	<tr>
+		<td>jed.schneider@gmail.com</td>
+		<td>706-207-4458</td>
+	</tr>
+</table>
+</div>
+
+<div class="slide">
 <h1>What is Ruby on Rails?</h1>
 <table class="centered">
 	<tr>
-		<td> <object width="640" height="505"><param name="movie" value="http://www.youtube.com/v/PQbuyKUaKFo&hl=en&fs=1&rel=0&color1=0x2b405b&color2=0x6b8ab6"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/PQbuyKUaKFo&hl=en&fs=1&rel=0&color1=0x2b405b&color2=0x6b8ab6" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="640" height="505"></embed></object> </td>
+		<td> <object width="640" height="505"><param name="movie" value="http://www.youtube.com/v/PQbuyKUaKFo&hl=en&fs=1&rel=0&color1=0x2b405b&color2=0x6b8ab6"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/PQbuyKUaKFo&hl=en&fs=1&rel=0&color1=0x2b405b&color2=0x6b8ab6" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="640" height="505"></embed></object></td>
 	</tr>
 </table>
 </div>
@@ -63,9 +95,17 @@
 	<li>server and database agnostic</li>
 	<li>Integrated Testing</li>
 	<li>Just a few lines of configuration required</li>
+	<li>a strong community of developers</li>
+	<li>a clean code ethic (DRY, YAGNI, etc)</li>
 </ul>
-<h2>History</h2>
+<h2>Ruby on Rails History and Acceptance</h2>
 <p>No intro talk is complete without a reference to <a href="http://37signals.com/">37 Signals</a> and <a href="http://twitter.com/dhh">David Heinemeier Hansson</a></p>
+<ul>
+	<li>1,173,440 gem installs</li>
+	<li>4,329 &#8216;watchers&#8217; on github, 741 forks of the project</li>
+	<li><a href="http://highscalability.com/blog/2009/9/22/how-ravelry-scales-to-10-million-requests-using-rails.html">Scalabilty</a></li>
+	<li><a href="http://rubyonrails.org/applications">List of Apps on Rails</a></li>
+</ul>
 </div>
 
 <div class="slide">
@@ -73,8 +113,14 @@
 <table class="centered">
 	<tr>
 		<td><object width="640" height="505"><param name="movie" value="http://www.youtube.com/v/4XpnKHJAok8&hl=en&fs=1&rel=0&color1=0x2b405b&color2=0x6b8ab6"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/4XpnKHJAok8&hl=en&fs=1&rel=0&color1=0x2b405b&color2=0x6b8ab6" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="640" height="505"></embed></object></td>
-	</tr>
 </table>
+its a version control system
+its distributed
+its fast
+its used to manage the linux kernel 
+its well integrated with rails
+its easy, sorta...<p>skip to min 3:00</p>
+<p>|</p>
 </div>
 
 <div class="slide">
@@ -90,14 +136,22 @@
 	</ol></li>
 	<li>Create our Routing</li>
 	<li>Demonstrate the built-in Testing Framework</li>
-	<li>Add pre-built functionality with Ruby Gems</li>
+	<li>Add pre-built functionality with Ruby Gems and plugins</li>
 </ol>
 </div>
 
 <div class="slide">
 <h1>Lets Make a Rails Site</h1>
 <p><code>rails -d mysql barcamp</code><br />
-<code>rake db:create</code></p>
+<code>cd barcamp</code><br />
+<code>rake db:create:all</code></p>
+<p>Wait, what did we just do?</p>
+<ol>
+	<li>created the framework file structure</li>
+	<li>defined the database hooks</li>
+	<li>created 3 distinct databases development, production, test</li>
+</ol>
+<p><code>rake stats</code></p>
 </div>
 
 <div class="slide">
@@ -109,8 +163,20 @@ hide your database passwords<br />
 initialize the git repository<br />
 <code>git init</code><br />
 ignore files that will cause issues or take up space<br />
-<code>mate .gitignore #=&gt; .DS, config/database.yml, log/*.log, tmp/**/*, doc/api, doc/app</code><br />
-track ignored directories<br />
+<code>mate .gitignore</code></p>
+<div class="UltraViolet">
+<pre class="twilight">
+.DS_Store 
+config/database.yml
+log/*.log
+tmp/**/*
+doc/api
+doc/app
+vedor/plugins/*
+vendor/gems/*
+</pre>
+</div>
+<p>track ignored directories<br />
 <code>touch log/.gitignore; touch tmp/.gitignore</code><br />
 add all the files to the index<br />
 <code>git add .</code><br />
@@ -121,8 +187,13 @@ commit the project to the git repository<br />
 <div class="slide">
 <h1>A few points about git</h1>
 <ul>
-	<li>you now have the entire repository history inside the project directory</li>
+	<li>you now have the entire repository history inside the project directory (.git)</li>
 	<li>no central server, its distributed</li>
+</ul>
+<h2>a couple great commands</h2>
+<ul>
+	<li><code>git status</code></li>
+	<li><code>git log</code></li>
 </ul>
 </div>
 
@@ -144,17 +215,23 @@ commit the project to the git repository<br />
 <div class="slide">
 <h1>Migrations</h1>
 <p><code>rake db:migrate</code></p>
-</div>
-
-<div class="slide">
-<h1>Migrate data too</h1>
-<p><code>script/generate migration add_data_to_posts</code></p>
+<p>Migrations are a way to track and &#8216;migrate&#8217; between different database schema. It allows a modular approach to the database layer of web applications.</p>
 <div class="UltraViolet">
-<pre class="twilight"><span class="line-numbers">   1 </span> 
-<span class="line-numbers">   2 </span> 	<span class="Keyword">def</span> <span class="Entity">make_migration</span> <span class="Keyword">do </span>
-<span class="line-numbers">   3 </span> 		work
-<span class="line-numbers">   4 </span> 	end_
-<span class="line-numbers">   5 </span> 	
+<pre class="twilight"><span class="Comment"><span class="Comment">#</span> sample migration</span>
+<span class="Keyword">class</span> <span class="Entity">CreatePosts<span class="EntityInheritedClass"> <span class="EntityInheritedClass">&lt;</span> ActiveRecord::Migration</span></span>
+  <span class="Keyword">def</span> <span class="Entity">self.up</span>
+    create_table <span class="Constant"><span class="Constant">:</span>posts</span> <span class="Keyword">do </span>|<span class="Variable">t</span>|
+      t.<span class="Entity">string</span> <span class="Constant"><span class="Constant">:</span>title</span>
+      t.<span class="Entity">text</span> <span class="Constant"><span class="Constant">:</span>article</span>
+
+      t.<span class="Entity">timestamps</span>
+    <span class="Keyword">end</span>
+  <span class="Keyword">end</span>
+
+  <span class="Keyword">def</span> <span class="Entity">self.down</span>
+    drop_table <span class="Constant"><span class="Constant">:</span>posts</span>
+  <span class="Keyword">end</span>
+<span class="Keyword">end</span>
 </pre>
 </div>
 </div>
@@ -164,45 +241,95 @@ commit the project to the git repository<br />
 <p><code>git status</code></p>
 <p><code>git add .</code></p>
 <p>wait, didn&#8217;t we already add these? No we have to add modified files to the index.</p>
-<p><code>git commit -m 'created the post model'</code></p>
+<p><code>git commit -m 'scaffolded the post model'</code></p>
 <p><code>git status</code></p>
 <p><code>git log</code></p>
 </div>
 
 <div class="slide">
+<h1>Migrate data too</h1>
+<p><code>script/generate migration add_data_to_posts</code></p>
+<div class="UltraViolet">
+<pre class="twilight"><span class="line-numbers">   1 </span> 
+<span class="line-numbers">   2 </span> <span class="Keyword">class</span> <span class="Entity">AddPostData<span class="EntityInheritedClass"> <span class="EntityInheritedClass">&lt;</span> ActiveRecord::Migration</span></span>
+<span class="line-numbers">   3 </span>   <span class="Keyword">def</span> <span class="Entity">self.up</span>
+<span class="line-numbers">   4 </span>     <span class="Support">Post</span>.<span class="Entity">create</span> <span class="Constant"><span class="Constant">:</span>title</span> =&gt; <span class="String"><span class="String">&quot;</span>First Post<span class="String">&quot;</span></span>, 
+<span class="line-numbers">   5 </span>                 <span class="Constant"><span class="Constant">:</span>article</span> =&gt; <span class="String"><span class="String">&quot;</span>this is the first post<span class="String">&quot;</span></span>
+<span class="line-numbers">   6 </span>     <span class="Support">Post</span>.<span class="Entity">create</span> <span class="Constant"><span class="Constant">:</span>title</span>  =&gt; <span class="String"><span class="String">&quot;</span>Second Post<span class="String">&quot;</span></span>,
+<span class="line-numbers">   7 </span>                 <span class="Constant"><span class="Constant">:</span>article</span> =&gt; <span class="String"><span class="String">&quot;</span>this is the second post<span class="String">&quot;</span></span>
+<span class="line-numbers">   8 </span>   <span class="Keyword">end</span>
+<span class="line-numbers">   9 </span> 
+<span class="line-numbers">  10 </span>   <span class="Keyword">def</span> <span class="Entity">self.down</span>
+<span class="line-numbers">  11 </span>     <span class="Support">Post</span>.<span class="Entity">find</span>(<span class="Constant"><span class="Constant">:</span>all</span>).<span class="Entity">each</span> <span class="Keyword">do </span>|<span class="Variable">post</span>|
+<span class="line-numbers">  12 </span>       post.<span class="Entity">delete</span>
+<span class="line-numbers">  13 </span>     <span class="Keyword">end</span>  
+<span class="line-numbers">  14 </span>   <span class="Keyword">end</span>
+<span class="line-numbers">  15 </span> <span class="Keyword">end</span>
+<span class="line-numbers">  16 </span> 	
+</pre>
+</div>
+<p><code>git status</code><br />
+<code>git add .</code><br />
+<code>git commit -m "created a data migration for post data"</code></p>
+</div>
+
+<div class="slide">
+<h1>Stop and Smell the roses</h1>
+<p><code>script/server</code></p>
+<p>browse to <a href="http://localhost:3000">localhost:3000</a></p>
+<p>browse to <a href="http://localhost:3000/posts">localhost:3000/posts</a></p>
+</div>
+
+<div class="slide">
 <h1>A Further Look At the Code</h1>
-<p><object width="640" height="505"><param name="movie" value="http://www.youtube.com/v/p5EIrSM8dCA&hl=en&fs=1&rel=0&color1=0x2b405b&color2=0x6b8ab6"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/p5EIrSM8dCA&hl=en&fs=1&rel=0&color1=0x2b405b&color2=0x6b8ab6" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="640" height="505"></embed></object></p>
+<table class="centered">
+	<tr>
+		<td><object width="640" height="505"><param name="movie" value="http://www.youtube.com/v/p5EIrSM8dCA&hl=en&fs=1&rel=0&color1=0x2b405b&color2=0x6b8ab6"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/p5EIrSM8dCA&hl=en&fs=1&rel=0&color1=0x2b405b&color2=0x6b8ab6" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="640" height="505"></embed></object></td>
+	</tr>
+</table>
 </div>
 
 <div class="slide">
 <h1>Convention over Configuration</h1>
 <p>Convention over Configuration means you spend less time looking for things</p>
 <p>Lets look at the model, controller and view for post</p>
+<div class="UltraViolet">
+<pre class="twilight"><span class="line-numbers">   1 </span> <span class="Comment"><span class="Comment">#</span> app/models/post.rb</span>
+<span class="line-numbers">   2 </span> <span class="Keyword">class</span> <span class="Entity">Post<span class="EntityInheritedClass"> <span class="EntityInheritedClass">&lt;</span> ActiveRecord::Base</span></span>
+<span class="line-numbers">   3 </span> <span class="Keyword">end</span>
+</pre>
+</div>
 </div>
 
 <div class="slide">
 <h1>Lets add another model</h1>
-<p>the comment model</p>
-<p>the relationship:<br />
-a post has many comments, each comment belongs to one and only post</p>
+<h2>The Comment Model</h2>
+<h2>the relationship:</h2>
+<blockquote>
+<p>A post has many comments, <br />
+each comment belongs to one and only post</p>
+</blockquote>
+<p>in Rails we can define this simply with <code>belongs_to</code> and <code>has_many</code></p>
 </div>
 
 <div class="slide">
 <h1>A good time for a git branch</h1>
 <p>in git, branching is cheap, so we can use one to isolate changes to our application<br />
-<code>git checkout -b add_comment</code></p>
+<code>git status</code><br />
+<code>git checkout -b add_comment_model</code></p>
 </div>
 
 <div class="slide">
 <h1>The comment model</h1>
-<p><code>script/generate comment title:string commentText:text</code></p>
+<p><code>script/generate scaffold comment title:string comment_text:text post_id:integer</code></p>
+<p><code>rake db:migrate</code></p>
 </div>
 
 <div class="slide">
 <h1>In comes the testing</h1>
 <p><span style="color:red">Red</span>. <span style="color:green">Green</span>. Refactor.</p>
 <p>Rails supports <em>Test Driven Development</em> patterns, out of the box with Test:Unit. There are many other choices of test frameworks also (rSpec) There are also several tools available for <em>Behavior Driven Development</em> (Cucumber).</p>
-<p>There are several things we want to test:</p>
+<p>There are several things we may want to test:</p>
 <ol>
 	<li>Test that the comment model code can talk to the database</li>
 	<li>Test that the model works as expected with model code (validations, eg)</li>
@@ -212,19 +339,129 @@ a post has many comments, each comment belongs to one and only post</p>
 </div>
 
 <div class="slide">
+<h1>Setup test env</h1>
+<p><code>rake db:test:prepare</code><br />
+in <code>test_helper.rb</code>, <code>require 'redgreen'</code></p>
+</div>
+
+<div class="slide">
 <h1>Unit Test</h1>
+<p><span style="color:red;">Red</span></p>
+<div class="UltraViolet">
+<pre class="twilight"><span class="line-numbers">   1 </span> <span class="Keyword">require</span> <span class="String"><span class="String">'</span>test_helper<span class="String">'</span></span>
+<span class="line-numbers">   2 </span> <span class="Keyword">class</span> <span class="Entity">CommentTest<span class="EntityInheritedClass"> <span class="EntityInheritedClass">&lt;</span> ActiveSupport::TestCase</span></span>
+<span class="line-numbers">   3 </span>   <span class="Keyword">def</span> <span class="Entity">test_title_not_blank</span>
+<span class="line-numbers">   4 </span>     assert <span class="Constant">true</span>
+<span class="line-numbers">   5 </span>     <span class="Variable"><span class="Variable">@</span>comment</span> <span class="Keyword">=</span> <span class="Support">Comment</span>.<span class="Entity">new</span>(<span class="Constant"><span class="Constant">:</span>title</span> =&gt; <span class="Constant">nil</span>, <span class="Constant"><span class="Constant">:</span>comment_text</span> =&gt; <span class="String"><span class="String">&quot;</span>this is a comment<span class="String">&quot;</span></span>)
+<span class="line-numbers">   6 </span>     assert_equal <span class="Constant">false</span>, <span class="Variable"><span class="Variable">@</span>comment</span>.<span class="Entity">save</span>
+<span class="line-numbers">   7 </span>   <span class="Keyword">end</span>
+<span class="line-numbers">   8 </span> <span class="Keyword">end</span>
+</pre>
+</div>
+<p><span style="color:green;">Green</span></p>
+<div class="UltraViolet">
+<pre class="twilight"><span class="line-numbers">   1 </span> <span class="Keyword">class</span> <span class="Entity">Comment<span class="EntityInheritedClass"> <span class="EntityInheritedClass">&lt;</span> ActiveRecord::Base</span></span>
+<span class="line-numbers">   2 </span>   validates_presence_of <span class="Constant"><span class="Constant">:</span>title</span>, <span class="Constant"><span class="Constant">:</span>message</span> =&gt; <span class="String"><span class="String">&quot;</span>can't be blank<span class="String">&quot;</span></span>
+<span class="line-numbers">   3 </span> <span class="Keyword">end</span>
+</pre>
+</div>
+<p><span style="color:red;">Red</span></p>
+<div class="UltraViolet">
+<pre class="twilight"><span class="line-numbers">   1 </span> fixtures <span class="Constant"><span class="Constant">:</span>comments</span>, <span class="Constant"><span class="Constant">:</span>posts</span>
+<span class="line-numbers">   2 </span> 
+<span class="line-numbers">   3 </span> <span class="Keyword">def</span> <span class="Entity">test_posts_have_many_comments</span>
+<span class="line-numbers">   4 </span>   assert_equal <span class="Constant">1</span>, <span class="Entity">comments</span>(<span class="Constant"><span class="Constant">:</span>one</span>).<span class="Entity">post_id</span>
+<span class="line-numbers">   5 </span>   assert_equal <span class="Constant">1</span>, <span class="Entity">comments</span>(<span class="Constant"><span class="Constant">:</span>two</span>).<span class="Entity">post_id</span>
+<span class="line-numbers">   6 </span>   assert_equal <span class="Constant">1</span>, <span class="Entity">posts</span>(<span class="Constant"><span class="Constant">:</span>one</span>).<span class="Entity">id</span>
+<span class="line-numbers">   7 </span>   assert_equal <span class="Constant">2</span>, <span class="Entity">posts</span>(<span class="Constant"><span class="Constant">:</span>one</span>).<span class="Entity">comments</span>.<span class="Entity">count</span>
+<span class="line-numbers">   8 </span> <span class="Keyword">end</span>
+</pre>
+</div>
 </div>
 
 <div class="slide">
 <h1>Functional Test</h1>
+<p><code>rake test:functionals</code></p>
+<p><span style="color:red;">Red</span></p>
+<div class="UltraViolet">
+<pre class="twilight"><span class="line-numbers">   1 </span> <span class="Keyword">def</span> <span class="Entity">test_routing_for_comments</span>
+<span class="line-numbers">   2 </span>   options <span class="Keyword">=</span> {<span class="Constant"><span class="Constant">:</span>controller</span> =&gt; <span class="String"><span class="String">&quot;</span>comments<span class="String">&quot;</span></span>, <span class="Constant"><span class="Constant">:</span>action</span> =&gt; <span class="String"><span class="String">&quot;</span>index<span class="String">&quot;</span></span>, <span class="Constant"><span class="Constant">:</span>post_id</span> =&gt; <span class="String"><span class="String">&quot;</span>1<span class="String">&quot;</span></span>}
+<span class="line-numbers">   3 </span>   assert_routing <span class="String"><span class="String">&quot;</span>/posts/1/comments<span class="String">&quot;</span></span>, options
+<span class="line-numbers">   4 </span> <span class="Keyword">end</span>
+</pre>
+</div>
+<p><span style="color:green;">Green</span></p>
+<div class="UltraViolet">
+<pre class="twilight"><span class="line-numbers">   1 </span> <span class="Comment"><span class="Comment">#</span>routes.rb</span>
+<span class="line-numbers">   2 </span> map.<span class="Entity">resources</span> <span class="Constant"><span class="Constant">:</span>posts</span>, <span class="Constant"><span class="Constant">:</span>has_many</span> =&gt; <span class="Constant"><span class="Constant">:</span>comments</span>
+</pre>
+</div>
 </div>
 
 <div class="slide">
-<h1>Adding Functionality with Gems</h1>
+<h1>Functional Test Views</h1>
+<p><span style="color:red;">Red</span></p>
+<div class="UltraViolet">
+<pre class="twilight"><span class="line-numbers">   1 </span> <span class="Comment"><span class="Comment">#</span>posts_controller_test.rb</span>
+<span class="line-numbers">   2 </span> <span class="Keyword">def</span> <span class="Entity">test_get_index_template</span>
+<span class="line-numbers">   3 </span>   assert get <span class="Constant"><span class="Constant">:</span>show</span>, <span class="Constant"><span class="Constant">:</span>id</span> =&gt; <span class="Entity">posts</span>(<span class="Constant"><span class="Constant">:</span>one</span>).<span class="Entity">id</span>
+<span class="line-numbers">   4 </span>   assert_template <span class="String"><span class="String">&quot;</span>show<span class="String">&quot;</span></span>
+<span class="line-numbers">   5 </span>   assert_select <span class="String"><span class="String">&quot;</span>Div#comments<span class="String">&quot;</span></span>
+<span class="line-numbers">   6 </span> <span class="Keyword">end</span>
+</pre>
+</div>
+<p><span style="color:green;">Green</span></p>
+<div class="UltraViolet">
+<pre class="twilight"><span class="line-numbers">   1 </span> 
+<span class="line-numbers">   2 </span> 	<span class="MetaTagAll"><span class="MetaTagAll">&lt;</span><span class="MetaTagAll">div</span> <span class="MetaTagAll"><span class="MetaTagAll">id</span><span class="MetaTagAll">=</span><span class="String"><span class="String">&quot;</span><span class="String">comments</span><span class="String">&quot;</span></span></span> <span class="MetaTagAll">style</span>=<span class="String"><span class="String">&quot;</span>background-color:green;<span class="String">&quot;</span></span><span class="MetaTagAll">&gt;</span></span>
+<span class="line-numbers">   3 </span> 		<span class="EmbeddedSource"><span class="EmbeddedSource">&lt;%</span> <span class="Variable"><span class="Variable">@</span>post</span><span class="EmbeddedSource"><span class="EmbeddedSource">.</span><span class="Entity">comments</span></span><span class="EmbeddedSource"><span class="EmbeddedSource">.</span><span class="Entity">each</span></span> <span class="Keyword">do </span><span class="EmbeddedSource">|</span><span class="Variable">comment</span><span class="EmbeddedSource">|</span> <span class="EmbeddedSource">%&gt;</span></span>
+<span class="line-numbers">   4 </span> 			<span class="MetaTagAll"><span class="MetaTagAll">&lt;</span><span class="MetaTagAll">h3</span><span class="MetaTagAll">&gt;</span></span><span class="EmbeddedSource"><span class="EmbeddedSource">&lt;%=</span> comment<span class="EmbeddedSource"><span class="EmbeddedSource">.</span><span class="Entity">title</span></span> <span class="EmbeddedSource">%&gt;</span></span><span class="MetaTagAll"><span class="MetaTagAll">&lt;/</span><span class="MetaTagAll">h3</span><span class="MetaTagAll">&gt;</span></span>
+<span class="line-numbers">   5 </span> 			<span class="MetaTagAll"><span class="MetaTagAll">&lt;</span><span class="MetaTagAll">p</span><span class="MetaTagAll">&gt;</span></span><span class="EmbeddedSource"><span class="EmbeddedSource">&lt;%=</span> comment<span class="EmbeddedSource"><span class="EmbeddedSource">.</span><span class="Entity">comment_text</span></span> <span class="EmbeddedSource">%&gt;</span></span><span class="MetaTagAll"><span class="MetaTagAll">&lt;/</span><span class="MetaTagAll">p</span><span class="MetaTagAll">&gt;</span></span>
+<span class="line-numbers">   6 </span> 		<span class="EmbeddedSource"><span class="EmbeddedSource">&lt;%</span> <span class="Keyword">end</span> <span class="EmbeddedSource">%&gt;</span></span>
+<span class="line-numbers">   7 </span> 	<span class="MetaTagAll"><span class="MetaTagAll">&lt;/</span><span class="MetaTagAll">div</span><span class="MetaTagAll">&gt;</span></span>
+<span class="line-numbers">   8 </span> 	
+</pre>
+</div>
+</div>
+
+<div class="slide">
+<h1>Merge In the Comments Code</h1>
+<p><code>git status</code><br />
+<code>git add .</code><br />
+<code>git commit -m "finished up comment model"</code><br />
+<code>git checkout master</code><br />
+<code>git merge add_comment_model</code></p>
+</div>
+
+<div class="slide">
+<h1>Adding Functionality with Gems &amp; Plugins</h1>
+<p><code>git checkout -b add_textile_editor</code></p>
+<p>We want to use a textile plugin, so:</p>
+<p><a href="http://github.com/defunkt/acts_as_textiled">acts as textiled</a></p>
+<p><code>script/plugin install git://github.com/defunkt/acts_as_textiled.git</code></p>
+<p>and, in the post model</p>
+<div class="UltraViolet">
+<pre class="twilight"><span class="line-numbers">   1 </span> <span class="Keyword">class</span> <span class="Entity">Post<span class="EntityInheritedClass"> <span class="EntityInheritedClass">&lt;</span> ActiveRecord::Base</span></span>
+<span class="line-numbers">   2 </span>   has_many <span class="Constant"><span class="Constant">:</span>comments</span>
+<span class="line-numbers">   3 </span>   
+<span class="line-numbers">   4 </span>   acts_as_textiled <span class="Constant"><span class="Constant">:</span>article</span>
+<span class="line-numbers">   5 </span> <span class="Keyword">end</span>
+</pre>
+</div>
+<p>now fix up the views</p>
 </div>
 
 <div class="slide">
 <h1>Publish To Github</h1>
+<p>merge back to master</p>
+<p><code>git status</code><br />
+<code>git add .</code><br />
+<code>git commit -m "added acts_as_textiled to post model"</code><br />
+<code>git checkout master</code><br />
+<code>git merge add_textile_editor</code></p>
+<p>create a new github project<br />
+add the origin</p>
+<p><code>git push origin master</code></p>
 </div>
 
 <div class="slide">
